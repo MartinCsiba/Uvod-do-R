@@ -1,0 +1,78 @@
+---
+title: "Domáca úloha 1"
+output: html_notebook
+---
+- Úloha 1: Napíšte funkciu, ktorá vracia kombinačné číslo.
+
+combin <- function(n,k)
+{
+  if(n < k)
+    return("ERROR, POTREBUJEME n > k")
+  else
+    return(factorial(n)/(factorial(k)*factorial(n-k)))
+}
+combin (7,3)
+combin (11,5)
+combin (2,9)
+
+Alternatívne by mal stačiť aj jednoduchší kód, nakoľko pri nesprávnej forme kombinačného čísla systém automaticky vypíše ERROR
+
+combin2 <- function(n,k)
+{
+  eval(factorial(n)/(factorial(k)*factorial(n-k)))
+}
+combin2 (7,3)
+combin2 (11,5) 
+combin2 (2,9)
+
+
+
+
+- Úloha 2: Predstavte si, že v `R` nemáme funkciu `sqrt` a napíšte funkciu, ktorá vráti odhad odmocniny x.
+
+odhadsqrt <- function(n)
+{
+  a <- 2
+  min <- 1e-10
+  repeat
+  {
+    if (abs((a^2)-n) < min)
+      break
+    else a <- 0.5*((n/a)+a)
+  }
+  return(a)
+}
+
+odhadsqrt(9)
+odhadsqrt(49)
+odhadsqrt(81)
+
+
+
+
+- Úloha 3: Napíšte funkciu, ktorá vypočíta odhad určitého integrálu a jeho chybu - teda vracia dve hodnoty.
+
+integr <- function(f, a, b)
+{
+  f <- function(x) {x*exp(x)}
+  return(integrate(f, lower = a, upper = b))  
+}
+integr(,2,3)
+integr(,8,9)
+integr(,1,5)
+
+
+
+
+- Úloha 4: Napíšte funkciu, ktorá nahradí znaky s diakritikou v textovom reťazci príslušnými znakmi bez diakritiky.
+
+library(stringi)
+clear.dia <- function(s)
+{
+  stri_trans_general(s,"Latin-ASCII")
+}
+
+clear.dia("čučoriadka")
+clear.dia("mačka")
+clear.dia("varila myšička kašičku")
+
